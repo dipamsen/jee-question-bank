@@ -18,7 +18,7 @@ app.post(
   async (req, res) => {
     const body = req.body;
     if (body.data.name === "question") {
-      const { subject } = body.data.options[0].value;
+      // const { subject } = body.data.options[0].value;
 
       res.json({
         type: 4,
