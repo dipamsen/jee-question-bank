@@ -46,7 +46,7 @@ app.post(
         if (cmd.options && cmd.options[0] && cmd.options[0].value) {
           chapter = cmd.options[0].value;
         } else {
-          const allChaps = (await getCompletedChaps())[subject];
+          const allChaps = await getChapters(11, subject);
           chapter = allChaps[Math.floor(Math.random() * allChaps.length)];
         }
         console.log(chapter);
