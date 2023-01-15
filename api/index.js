@@ -48,7 +48,7 @@ app.post(
 
       const qid = questionMD.QuestionId;
       const question = await getQuestion(qid);
-      const body = {
+      const payload = {
         type: 4,
         data: {
           embeds: [
@@ -68,7 +68,7 @@ app.post(
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(body),
+          body: JSON.stringify(payload),
         }
       );
     }
