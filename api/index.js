@@ -16,8 +16,8 @@ const app = express();
 
 app.post(
   "/dc-interact",
-  express.json(),
-  // verifyKeyMiddleware(process.env.DISCORD_PUBLIC_KEY),
+  // express.json(),
+  verifyKeyMiddleware(process.env.DISCORD_PUBLIC_KEY),
   async (req, res) => {
     const body = req.body;
 
@@ -29,7 +29,7 @@ app.post(
       res.json({
         type: 4,
         data: {
-          content: `Loading... (Debug token: \`${token}\)`,
+          content: `Loading... (Debug token: \`${token}\`)`,
         },
       });
 
