@@ -29,7 +29,7 @@ app.post(
       res.json({
         type: 4,
         data: {
-          content: `Loading...`,
+          content: `Loading... (Debug token: \`${token}\)`,
         },
       });
 
