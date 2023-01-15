@@ -45,7 +45,8 @@ app.post(
         questions.questions[
           Math.floor(Math.random() * questions.questions.length)
         ];
-
+      console.log(question);
+      console.log(token);
       const qid = questionMD.QuestionId;
       const question = await getQuestion(qid);
       const payload = {
