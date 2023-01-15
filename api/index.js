@@ -7,6 +7,8 @@ const {
   getQuestion,
   Constants,
 } = require("../utils/functions");
+
+const axios = require("axios");
 const { getCompletedChaps, setCompletedChaps } = require("../utils/data-store");
 const sendRandomQuestion = require("../scripts/discord-send");
 const { verifyKeyMiddleware } = require("discord-interactions");
@@ -14,13 +16,14 @@ const app = express();
 
 app.post(
   "/dc-interact",
+  // express.json(),
   verifyKeyMiddleware(process.env.DISCORD_PUBLIC_KEY),
   async (req, res) => {
     const body = req.body;
 
     const token = body.token;
 
-    if (body.data.name === "question") {
+    if (body?.data?.name === "question") {
       const cmd = body.data.options[0];
 
       res.json({
@@ -41,63 +44,56 @@ app.post(
         } else {
           subject = cmd.name;
         }
-        console.log(subject);
         let chapter;
         if (cmd.options && cmd.options[0] && cmd.options[0].value) {
           chapter = cmd.options[0].value;
         } else {
-          const allChaps = await getChapters(11, subject);
+          const allChaps = (await getCompletedChaps())[subject];
           chapter = allChaps[Math.floor(Math.random() * allChaps.length)];
         }
-        console.log(chapter);
+        const chapterInfo = await getChapters(
+          Constants.CLASS_XI,
+          Constants[subject.toUpperCase()]
+        );
+
         const questions = await getAllQuestions([chapter]);
         const questionMD =
           questions.questions[
             Math.floor(Math.random() * questions.questions.length)
           ];
-        console.log(question);
-        console.log(token);
         const qid = questionMD.QuestionId;
         const question = await getQuestion(qid);
+
+        const subjectCap = subject.charAt(0).toUpperCase() + subject.slice(1);
         const payload = {
           embeds: [
             {
-              title: `Question of the Day - ${subject}`,
+              title: `Question of the Day`,
+              description: `**Topic:** ${subjectCap} - ${
+                chapterInfo.find((c) => c.courseChapterId === chapter)
+                  .chapterName
+              }
+Answer: ||${question.questionData.answerOption}||`,
               image: {
-                url: question.questionImage,
+                url: question.questionData.questionDiagramURL,
               },
             },
           ],
         };
-        await fetch(
-          `https://discord.com/api/webhooks/${body.application_id}/${token}`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(payload),
-          }
-        );
-        await fetch(`https://fp-discord-pinger-test.vercel.app/sendmessage`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        });
+        const url = `https://discord.com/api/webhooks/${body.application_id}/${token}`;
+        await axios.post(url, payload);
       } catch (e) {
         console.error(e);
-        await fetch(`https://fp-discord-pinger-test.vercel.app/sendmessage`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            content: `Error: ${e.message}`,
-          }),
-        });
       }
+    } else {
+      res.json({
+        type: 4,
+        data: {
+          content: `Loading...
+      
+      \`\`\`${JSON.stringify(body, null, 2)}\`\`\``,
+        },
+      });
     }
   }
 );
