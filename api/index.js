@@ -8,8 +8,11 @@ const {
   Constants,
 } = require("../utils/functions");
 const { getCompletedChaps, setCompletedChaps } = require("../utils/data-store");
-const getRandomQuestion = require("../scripts/discord-send");
+const sendRandomQuestion = require("../scripts/discord-send");
+const { verifyKeyMiddleware } = require("discord-interactions");
 const app = express();
+
+app.use("/dc-interact", verifyKeyMiddleware(process.env.DISCORD_PUBLIC_KEY));
 
 app.use(cors());
 app.use(express.json());
@@ -104,8 +107,23 @@ app.get("/discord-qod/:subject", async (req, res) => {
     return;
   }
 
-  await getRandomQuestion(subject);
+  await sendRandomQuestion(subject);
   res.json({ success: true });
+});
+
+// route to handle discord slash command interactions
+app.get("/dc-interact", async (req, res) => {
+  const body = req.body;
+  if (body.data.name === "question") {
+    const { subject } = body.data.options[0].value;
+
+    res.json({
+      type: 4,
+      data: {
+        content: `\`\`\`json\n${JSON.stringify(body)}\n\`\`\``,
+      },
+    });
+  }
 });
 
 app.listen(3000, () => {
