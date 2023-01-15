@@ -17,8 +17,13 @@ app.post(
   verifyKeyMiddleware(process.env.DISCORD_PUBLIC_KEY),
   async (req, res) => {
     const body = req.body;
+
+    const token = body.token;
     if (body.data.name === "question") {
       const cmd = body.data.options[0];
+
+      res.json({ type: 5 });
+
       let subject;
       if (cmd.name === "random") {
         subject = ["physics", "chemistry", "maths"][
@@ -43,7 +48,7 @@ app.post(
 
       const qid = questionMD.QuestionId;
       const question = await getQuestion(qid);
-      res.json({
+      const body = {
         type: 4,
         data: {
           embeds: [
@@ -55,14 +60,17 @@ app.post(
             },
           ],
         },
-      });
-
-      res.json({
-        type: 4,
-        data: {
-          content: `\`\`\`json\n${JSON.stringify(body)}\n\`\`\``,
-        },
-      });
+      };
+      await fetch(
+        `https://discord.com/api/webhooks/1064207984810528838/${token}/messages/@original`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+        }
+      );
     }
   }
 );
