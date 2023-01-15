@@ -6,9 +6,9 @@ const {
   getAllQuestions,
   getQuestion,
   Constants,
-} = require("./utils/functions");
-const { getCompletedChaps, setCompletedChaps } = require("./utils/data-store");
-const getRandomQuestion = require("./scripts/discord-send");
+} = require("../utils/functions");
+const { getCompletedChaps, setCompletedChaps } = require("../utils/data-store");
+const getRandomQuestion = require("../scripts/discord-send");
 const app = express();
 
 app.use(cors());
@@ -111,3 +111,5 @@ app.get("/discord-qod/:subject", async (req, res) => {
 app.listen(3000, () => {
   console.log("Server started on port 3000");
 });
+
+module.exports = app;
