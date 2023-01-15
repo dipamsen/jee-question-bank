@@ -27,7 +27,10 @@ app.post(
       const cmd = body.data.options[0];
 
       res.json({
-        type: 5,
+        type: 4,
+        data: {
+          content: `Loading...`,
+        },
       });
 
       try {
