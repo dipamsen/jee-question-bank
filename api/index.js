@@ -59,20 +59,17 @@ app.post(
       const qid = questionMD.QuestionId;
       const question = await getQuestion(qid);
       const payload = {
-        type: 4,
-        data: {
-          embeds: [
-            {
-              title: `Question of the Day - ${subject}`,
-              image: {
-                url: question.questionImage,
-              },
+        embeds: [
+          {
+            title: `Question of the Day - ${subject}`,
+            image: {
+              url: question.questionImage,
             },
-          ],
-        },
+          },
+        ],
       };
       await fetch(
-        `https://discord.com/api/webhooks/1064207984810528838/${token}`,
+        `https://discord.com/api/webhooks/${body.application_id}/${token}`,
         {
           method: "POST",
           headers: {
