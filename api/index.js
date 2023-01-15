@@ -19,10 +19,18 @@ app.post(
     const body = req.body;
 
     const token = body.token;
+
     if (body.data.name === "question") {
       const cmd = body.data.options[0];
 
-      res.json({ type: 5 });
+      res.json({
+        type: 4,
+        data: {
+          content: `Loading...
+      
+      \`\`\`${JSON.stringify(body, null, 2)}\`\`\``,
+        },
+      });
 
       let subject;
       if (cmd.name === "random") {
@@ -32,7 +40,7 @@ app.post(
       } else {
         subject = cmd.name;
       }
-
+      console.log(subject);
       let chapter;
       if (cmd.options && cmd.options[0] && cmd.options[0].value) {
         chapter = cmd.options[0].value;
@@ -40,6 +48,7 @@ app.post(
         const allChaps = (await getCompletedChaps())[subject];
         chapter = allChaps[Math.floor(Math.random() * allChaps.length)];
       }
+      console.log(chapter);
       const questions = await getAllQuestions([chapter]);
       const questionMD =
         questions.questions[
@@ -63,9 +72,9 @@ app.post(
         },
       };
       await fetch(
-        `https://discord.com/api/webhooks/1064207984810528838/${token}/messages/@original`,
+        `https://discord.com/api/webhooks/1064207984810528838/${token}`,
         {
-          method: "PATCH",
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
