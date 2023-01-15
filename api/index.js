@@ -79,7 +79,7 @@ app.post(
             body: JSON.stringify(payload),
           }
         );
-        await fetch(`https://fp-discord-pinger-test.vercel.app`, {
+        await fetch(`https://fp-discord-pinger-test.vercel.app/sendmessage`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -88,7 +88,7 @@ app.post(
         });
       } catch (e) {
         console.error(e);
-        await fetch(`https://fp-discord-pinger-test.vercel.app`, {
+        await fetch(`https://fp-discord-pinger-test.vercel.app/sendmessage`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
