@@ -16,8 +16,8 @@ const app = express();
 
 app.post(
   "/dc-interact",
-  // express.json(),
-  verifyKeyMiddleware(process.env.DISCORD_PUBLIC_KEY),
+  express.json(),
+  // verifyKeyMiddleware(process.env.DISCORD_PUBLIC_KEY),
   async (req, res) => {
     const body = req.body;
 
@@ -27,12 +27,7 @@ app.post(
       const cmd = body.data.options[0];
 
       res.json({
-        type: 4,
-        data: {
-          content: `Loading...
-      
-      \`\`\`${JSON.stringify(body, null, 2)}\`\`\``,
-        },
+        type: 5,
       });
 
       try {
@@ -66,6 +61,7 @@ app.post(
 
         const subjectCap = subject.charAt(0).toUpperCase() + subject.slice(1);
         const payload = {
+          content: `\`${qid}\``,
           embeds: [
             {
               title: `Question of the Day`,
@@ -80,8 +76,8 @@ Answer: ||${question.questionData.answerOption}||`,
             },
           ],
         };
-        const url = `https://discord.com/api/webhooks/${body.application_id}/${token}`;
-        await axios.post(url, payload);
+        const url = `https://discord.com/api/webhooks/${body.application_id}/${token}/messages/@original`;
+        await axios.patch(url, payload);
       } catch (e) {
         console.error(e);
       }
