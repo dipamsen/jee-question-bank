@@ -18,14 +18,45 @@ app.post(
   async (req, res) => {
     const body = req.body;
     if (body.data.name === "question") {
-      // const { subject } = body.data.options[0].value;
+      const cmd = body.data.options[0];
+      if (cmd.name === "random") {
+        const subject = ["physics", "chemistry", "maths"][
+          Math.floor(Math.random() * 3)
+        ];
 
-      res.json({
-        type: 4,
-        data: {
-          content: `\`\`\`json\n${JSON.stringify(body)}\n\`\`\``,
-        },
-      });
+        const chapters = (await getCompletedChaps())[subject];
+        const randomChapter =
+          chapters[Math.floor(Math.random() * chapters.length)];
+        const questions = await getAllQuestions([randomChapter]);
+
+        const questionMD =
+          questions.questions[
+            Math.floor(Math.random() * questions.questions.length)
+          ];
+
+        const qid = questionMD.QuestionId;
+        const question = await getQuestion(qid);
+        res.json({
+          type: 4,
+          data: {
+            embeds: [
+              {
+                title: `Question of the Day - ${subject}`,
+                image: {
+                  url: question.questionImage,
+                },
+              },
+            ],
+          },
+        });
+      } else {
+        res.json({
+          type: 4,
+          data: {
+            content: `\`\`\`json\n${JSON.stringify(body)}\n\`\`\``,
+          },
+        });
+      }
     }
   }
 );
