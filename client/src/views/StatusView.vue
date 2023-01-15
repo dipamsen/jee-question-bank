@@ -1,7 +1,24 @@
 <script setup lang="ts">
-import { onMounted, ref, reactive, watchEffect, type Ref } from "vue";
+import {
+  onMounted,
+  ref,
+  reactive,
+  watchEffect,
+  type Ref,
+  onBeforeUnmount,
+  onUnmounted,
+} from "vue";
+import { useChaptersStore } from "../stores/chapter";
 
-const subjects = ref<any[]>([]);
+const store = useChaptersStore();
+
+const loaded = ref(false);
+
+// @ts-expect-error: Object.entries is not a function
+const subjects = Object.entries(store.chapters).map(([sb, chaps]) => ({
+  name: sb,
+  chapters: chaps,
+}));
 
 const compStatus = reactive<Record<string, number[]>>({
   physics: [],
@@ -9,23 +26,15 @@ const compStatus = reactive<Record<string, number[]>>({
   maths: [],
 });
 
-// onMounted(async () => {
-for (const sb of ["physics", "chemistry", "maths"]) {
-  const obj: any = {};
-  obj.name = sb;
-  const response = await fetch(
-    "http://localhost:3000/chapters?subject=" + sb + "&grade=11"
-  );
-  const chapters = await response.json();
-  obj.chapters = chapters;
-  subjects.value.push(obj);
-}
+onMounted(async () => {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/comp-status`);
+  const status = await response.json();
+  for (const sb of ["physics", "chemistry", "maths"]) {
+    compStatus[sb] = status[sb];
+  }
 
-const response = await fetch(`${import.meta.env.VITE_API_URL}/comp-status`);
-const status = await response.json();
-for (const sb of ["physics", "chemistry", "maths"]) {
-  compStatus[sb] = status[sb];
-}
+  loaded.value = true;
+});
 
 const updateStatus = async () => {
   await fetch(`${import.meta.env.VITE_API_URL}/comp-status`, {
@@ -49,15 +58,26 @@ function toggleEditable() {
 
 <template>
   <v-main>
-    <v-container fixed style="max-width: 800px">
+    <v-container fixed style="max-width: 800px" v-if="loaded">
       <div v-for="subject in subjects">
-        <h1 class="upper">{{ subject.name }}</h1>
-        <!-- <v-chip-group
-          column
-          multiple
-          selected-class="text-primary"
-          v-model="compStatus[subject.name]"
-        > -->
+        <v-row justify="space-between">
+          <h1 class="upper">{{ subject.name }}</h1>
+
+          <v-progress-circular
+            :size="50"
+            :model-value="
+              (100 * compStatus[subject.name].length) / subject.chapters.length
+            "
+            color="primary"
+            >{{
+              (
+                (100 * compStatus[subject.name].length) /
+                subject.chapters.length
+              ).toFixed(0)
+            }}%</v-progress-circular
+          >
+        </v-row>
+
         <v-checkbox
           v-for="chapter of subject.chapters"
           color="primary"
@@ -68,23 +88,25 @@ function toggleEditable() {
           :value="chapter.courseChapterId"
           :label="chapter.chapterName"
         />
-
-        <!-- </v-chip-group> -->
+        <v-divider class="mt-4 mb-8" />
       </div>
       <v-row>
-        <v-btn @click="toggleEditable()" block>{{
+        <v-btn class="ma-2" @click="toggleEditable()">{{
           !editable ? "Edit" : "Cancel"
         }}</v-btn>
-        <v-btn @click="updateStatus()">Update</v-btn>
+        <v-btn class="ma-2" @click="updateStatus()" :disabled="!editable"
+          >Update</v-btn
+        >
       </v-row>
 
-      <v-snackbar model="snackbar">Updated Successfully!</v-snackbar>
+      <v-dialog model="snackbar">Updated Successfully!</v-dialog>
     </v-container>
+    <v-progress-linear v-else indeterminate></v-progress-linear>
   </v-main>
 </template>
 
 <style>
 .upper {
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 </style>

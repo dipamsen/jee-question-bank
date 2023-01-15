@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import { ref, watchEffect } from "vue";
 import ChapterChoose from "@/components/ChapterChoose.vue";
+import { useChaptersStore } from "../stores/chapter";
 
-const subject = ref("physics");
+const subject = ref<"physics" | "chemistry" | "maths">("physics");
+
+const store = useChaptersStore();
+
+const theme = ref("dark");
 </script>
 
 <template>

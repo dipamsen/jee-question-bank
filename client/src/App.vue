@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { RouterLink, RouterView } from "vue-router";
-import ChapterChoose from "./components/ChapterChoose.vue";
+import { useChaptersStore } from "./stores/chapter";
+
+const store = useChaptersStore();
+
+store.loadChapters();
 
 const theme = ref("dark");
 
@@ -9,12 +13,14 @@ const items = [
   { title: "Home", icon: "mdi-home", to: "/" },
   { title: "Completion Status", icon: "mdi-check-circle", to: "/status" },
 ];
+
+const drawer = ref(false);
 </script>
 
 <template>
   <v-app :theme="theme">
     <v-app-bar>
-      <v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click="drawer = !drawer">
         <v-avatar>
           <v-img src="/favicon.png"></v-img>
         </v-avatar>
@@ -22,7 +28,7 @@ const items = [
       <v-toolbar-title>JEE Question Bank</v-toolbar-title>
     </v-app-bar>
 
-    <v-navigation-drawer permanent absolute>
+    <v-navigation-drawer :model-value="drawer">
       <v-list nav>
         <v-list-item
           v-for="item in items"
@@ -36,9 +42,10 @@ const items = [
       </v-list>
     </v-navigation-drawer>
 
-    <Suspense>
-      <RouterView />
-    </Suspense>
+    <RouterView v-if="store.loaded" />
+    <v-main v-else>
+      <v-progress-linear indeterminate></v-progress-linear>
+    </v-main>
   </v-app>
 </template>
 
