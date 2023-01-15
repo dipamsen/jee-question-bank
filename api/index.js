@@ -32,52 +32,68 @@ app.post(
         },
       });
 
-      let subject;
-      if (cmd.name === "random") {
-        subject = ["physics", "chemistry", "maths"][
-          Math.floor(Math.random() * 3)
-        ];
-      } else {
-        subject = cmd.name;
-      }
-      console.log(subject);
-      let chapter;
-      if (cmd.options && cmd.options[0] && cmd.options[0].value) {
-        chapter = cmd.options[0].value;
-      } else {
-        const allChaps = (await getCompletedChaps())[subject];
-        chapter = allChaps[Math.floor(Math.random() * allChaps.length)];
-      }
-      console.log(chapter);
-      const questions = await getAllQuestions([chapter]);
-      const questionMD =
-        questions.questions[
-          Math.floor(Math.random() * questions.questions.length)
-        ];
-      console.log(question);
-      console.log(token);
-      const qid = questionMD.QuestionId;
-      const question = await getQuestion(qid);
-      const payload = {
-        embeds: [
-          {
-            title: `Question of the Day - ${subject}`,
-            image: {
-              url: question.questionImage,
-            },
-          },
-        ],
-      };
-      await fetch(
-        `https://discord.com/api/webhooks/${body.application_id}/${token}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
+      try {
+        let subject;
+        if (cmd.name === "random") {
+          subject = ["physics", "chemistry", "maths"][
+            Math.floor(Math.random() * 3)
+          ];
+        } else {
+          subject = cmd.name;
         }
-      );
+        console.log(subject);
+        let chapter;
+        if (cmd.options && cmd.options[0] && cmd.options[0].value) {
+          chapter = cmd.options[0].value;
+        } else {
+          const allChaps = (await getCompletedChaps())[subject];
+          chapter = allChaps[Math.floor(Math.random() * allChaps.length)];
+        }
+        console.log(chapter);
+        const questions = await getAllQuestions([chapter]);
+        const questionMD =
+          questions.questions[
+            Math.floor(Math.random() * questions.questions.length)
+          ];
+        console.log(question);
+        console.log(token);
+        const qid = questionMD.QuestionId;
+        const question = await getQuestion(qid);
+        const payload = {
+          embeds: [
+            {
+              title: `Question of the Day - ${subject}`,
+              image: {
+                url: question.questionImage,
+              },
+            },
+          ],
+        };
+        await fetch(
+          `https://discord.com/api/webhooks/${body.application_id}/${token}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          }
+        );
+      } catch (e) {
+        console.error(e);
+        await fetch(
+          `https://discord.com/api/webhooks/${body.application_id}/${token}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              content: `Error: ${e.message}`,
+            }),
+          }
+        );
+      }
     }
   }
 );
