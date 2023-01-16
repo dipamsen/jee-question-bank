@@ -13,7 +13,7 @@ const selectedQuestionType = ref<string[]>([]);
 const selectedKSCCluster = ref<string[]>([]);
 
 const difficultyOptions = ["Easy", "Basic", "Normal", "Hard", "Tough"];
-const questionTypeOptions = ["Objective", "Multiple Choice", "Numeric"];
+const questionTypeOptions = ["Objective", "Multiple Choice", "Numerical"];
 const kscClusterNames = new Set(props.questions.map((q) => q.kscClusterName));
 
 const renderedQuestions = ref(props.questions);
@@ -137,5 +137,14 @@ watchEffect(() => {
       <p>{{ question.QuestionType }}</p>
       <p>{{ question.DifficultyGroup }}</p>
     </v-card-text>
+    <v-divider />
+    <v-card-actions>
+      <v-btn
+        color="primary"
+        variant="tonal"
+        :to="`/question/${question.QuestionId}`"
+        >View</v-btn
+      >
+    </v-card-actions>
   </v-card>
 </template>
