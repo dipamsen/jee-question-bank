@@ -11,39 +11,21 @@ const store = useChaptersStore();
 const theme = ref("dark");
 
 const chapters = ref<any[]>([]);
-
-// watchEffect(async (onCleanup) => {
-//   const controller = new AbortController();
-//   const signal = controller.signal;
-//   chapters.value = [];
-//   onCleanup(() => {
-//     controller.abort();
-//   });
-//   const response = await fetch(
-//     `${import.meta.env.VITE_API_URL}/chapters?subject=${
-//       props.subject
-//     }&grade=11`,
-//     {
-//       signal,
-//     }
-//   );
-//   chapters.value = await response.json();
-// });
 </script>
 
 <template>
-  <v-sheet class="ma-2 px-4 py-2" rounded>
-    <h2>Choose a Chapter</h2>
-    <v-chip-group column selected-class="text-primary">
-      <v-chip
-        v-for="chapter of store.chapters[subject]"
-        :key="chapter.chapterId"
-        variant="outlined"
-      >
-        {{ chapter.chapterName }}
-      </v-chip>
-    </v-chip-group>
-  </v-sheet>
+  <h2>Choose a Chapter</h2>
+  <v-list column selected-class="text-primary">
+    <v-list-item
+      elevation="1"
+      v-for="chapter of store.chapters[subject]"
+      :key="chapter.chapterId"
+      :value="chapter.courseChapterId"
+      :title="chapter.chapterName"
+      :to="`/chapter/${chapter.courseChapterId}`"
+    >
+    </v-list-item>
+  </v-list>
 </template>
 
 <style scoped>

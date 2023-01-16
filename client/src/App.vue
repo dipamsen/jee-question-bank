@@ -42,7 +42,7 @@ const drawer = ref(false);
       </v-list>
     </v-navigation-drawer>
 
-    <RouterView v-if="store.loaded" />
+    <RouterView v-if="store.chaptersLoaded" />
     <v-main v-else>
       <v-progress-linear indeterminate></v-progress-linear>
     </v-main>

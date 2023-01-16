@@ -1,12 +1,6 @@
 import { defineStore } from "pinia";
 import { reactive, ref } from "vue";
-
-interface Chapter {
-  chapterId: number;
-  courseChapterId: number;
-  chapterName: string;
-}
-
+import type { Chapter, ChapterInfo } from "../utils/types";
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const useChaptersStore = defineStore("chapters", () => {
@@ -16,9 +10,12 @@ export const useChaptersStore = defineStore("chapters", () => {
     maths: Chapter[];
   }>({ physics: [], chemistry: [], maths: [] });
 
-  const loaded = ref<boolean>(false);
+  const chapterInfos = reactive(new Map<number, ChapterInfo>());
+
+  const chaptersLoaded = ref<boolean>(false);
 
   const loadChapters = async () => {
+    if (chaptersLoaded.value) return;
     const subjects: ["physics", "chemistry", "maths"] = [
       "physics",
       "chemistry",
@@ -31,12 +28,26 @@ export const useChaptersStore = defineStore("chapters", () => {
       const allChapters: Chapter[] = await res.json();
       chapters[subject] = allChapters;
     }
-    loaded.value = true;
+
+    chaptersLoaded.value = true;
   };
 
+  const loadChapterInfo = async (chapterId: number) => {
+    if (chapterInfos.has(chapterId))
+      return chapterInfos.get(chapterId) as ChapterInfo;
+    const res = await fetch(`${API_URL}/questions?chapter=${chapterId}`);
+    const chapterInfo: ChapterInfo = await res.json();
+
+    chapterInfos.set(chapterId, chapterInfo);
+
+    return chapterInfo;
+  };
   return {
     chapters,
     loadChapters,
-    loaded,
+    chaptersLoaded,
+
+    chapterInfos,
+    loadChapterInfo,
   };
 });
