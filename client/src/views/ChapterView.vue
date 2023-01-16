@@ -12,7 +12,6 @@ const chapterInfo = ref<ChapterInfo | null>(null);
 
 onMounted(async () => {
   chapterInfo.value = await store.loadChapterInfo(+$route.params.chapterId);
-  console.log(chapterInfo.value);
 });
 </script>
 
@@ -21,9 +20,6 @@ onMounted(async () => {
     <v-container fixed style="max-width: 800px" v-if="chapterInfo">
       <h1>{{ chapterInfo.chapter.ChapterName }}</h1>
 
-      <h2>Browse All Questions</h2>
-      <div class="or">OR</div>
-      <h2>View Topicwise Questions</h2>
       <v-card
         v-for="topic in chapterInfo.kscClusterNames"
         :title="topic.KSCClusterName"
@@ -37,7 +33,12 @@ onMounted(async () => {
       >
         <v-divider />
         <v-card-actions>
-          <v-btn color="primary">Browse Questions</v-btn>
+          <v-btn
+            color="primary"
+            :to="`/chapter/${$route.params.chapterId}/${topic.KSCClusterId}`"
+          >
+            Browse Questions
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-container>

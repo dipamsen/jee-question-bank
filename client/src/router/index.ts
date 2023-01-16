@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import StatusView from "../views/StatusView.vue";
 import ChapterView from "../views/ChapterView.vue";
+import QuestionListView from "../views/QuestionListView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,7 +20,7 @@ const router = createRouter({
     {
       path: "/chapter/:chapterId",
       name: "chapter",
-      component: ChapterView,
+      component: QuestionListView,
     },
   ],
 });

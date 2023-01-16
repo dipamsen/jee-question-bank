@@ -29,9 +29,9 @@ const chapters = ref<any[]>([]);
         Browse All Questions
       </v-btn>
 
-      <v-btn color="primary" :to="`/chapter/${chapter.courseChapterId}/topic`">
+      <!-- <v-btn color="primary" :to="`/chapter/${chapter.courseChapterId}/topic`">
         View Topicwise Questions
-      </v-btn>
+      </v-btn> -->
     </v-card-actions>
   </v-card>
 </template>
