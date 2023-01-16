@@ -15,17 +15,25 @@ const chapters = ref<any[]>([]);
 
 <template>
   <h2>Choose a Chapter</h2>
-  <v-list column selected-class="text-primary">
-    <v-list-item
-      elevation="1"
-      v-for="chapter of store.chapters[subject]"
-      :key="chapter.chapterId"
-      :value="chapter.courseChapterId"
-      :title="chapter.chapterName"
-      :to="`/chapter/${chapter.courseChapterId}`"
-    >
-    </v-list-item>
-  </v-list>
+  <v-card
+    elevation="5"
+    v-for="chapter of store.chapters[subject]"
+    :key="chapter.chapterId"
+    :value="chapter.courseChapterId"
+    :title="chapter.chapterName"
+    class="mb-4"
+  >
+    <v-divider />
+    <v-card-actions>
+      <v-btn color="primary" :to="`/chapter/${chapter.courseChapterId}`">
+        Browse All Questions
+      </v-btn>
+
+      <v-btn color="primary" :to="`/chapter/${chapter.courseChapterId}/topic`">
+        View Topicwise Questions
+      </v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <style scoped>
