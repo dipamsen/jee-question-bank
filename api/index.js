@@ -14,6 +14,7 @@ const sendRandomQuestion = require("../scripts/discord-send");
 const handleDiscordInteraction = require("../scripts/discord-interaction");
 const { verifyKeyMiddleware } = require("discord-interactions");
 const app = express();
+const allChaps = require("./chaps.json");
 
 app.post(
   "/dc-interact",
@@ -27,6 +28,20 @@ app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("SpeedLabs API");
+});
+
+app.get("/chapters/all", async (req, res) => {
+  // const allChaps = { physics: [], chemistry: [], maths: [] };
+  // for (const subject of ["physics", "chemistry", "maths"]) {
+  //   for (const grade of [11, 12]) {
+  //     const chapters = await getChapters(
+  //       grade - 2,
+  //       Constants[subject.toUpperCase()]
+  //     );
+  //     allChaps[subject].push(...chapters.map((ch) => ({ ...ch, grd: grade })));
+  //   }
+  // }
+  res.json(allChaps);
 });
 
 app.get("/chapters", async (req, res) => {

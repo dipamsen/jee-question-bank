@@ -1,0 +1,674 @@
+{
+  "physics": [
+    {
+      "chapterId": 152,
+      "courseChapterId": 1,
+      "chapterName": "Unit, Vector and Dimension",
+      "grd": 11
+    },
+    {
+      "chapterId": 1,
+      "courseChapterId": 2,
+      "chapterName": "Motion in 1D, 2D & 3D",
+      "grd": 11
+    },
+    {
+      "chapterId": 153,
+      "courseChapterId": 3,
+      "chapterName": "Projectile",
+      "grd": 11
+    },
+    {
+      "chapterId": 154,
+      "courseChapterId": 4,
+      "chapterName": "Laws of Motion",
+      "grd": 11
+    },
+    {
+      "chapterId": 155,
+      "courseChapterId": 5,
+      "chapterName": "Work, Energy, Power",
+      "grd": 11
+    },
+    {
+      "chapterId": 156,
+      "courseChapterId": 6,
+      "chapterName": "Circular Motion",
+      "grd": 11
+    },
+    {
+      "chapterId": 157,
+      "courseChapterId": 7,
+      "chapterName": "Centre of Mass, Conservation of Linear Momentum",
+      "grd": 11
+    },
+    {
+      "chapterId": 158,
+      "courseChapterId": 8,
+      "chapterName": "Mechanics of Rotational Motion",
+      "grd": 11
+    },
+    {
+      "chapterId": 159,
+      "courseChapterId": 9,
+      "chapterName": "Gravitation",
+      "grd": 11
+    },
+    {
+      "chapterId": 160,
+      "courseChapterId": 10,
+      "chapterName": "Simple Harmonic Motion",
+      "grd": 11
+    },
+    {
+      "chapterId": 20,
+      "courseChapterId": 11,
+      "chapterName": "Wave Motion",
+      "grd": 11
+    },
+    {
+      "chapterId": 21,
+      "courseChapterId": 12,
+      "chapterName": "Superposition of Wave",
+      "grd": 11
+    },
+    {
+      "chapterId": 22,
+      "courseChapterId": 13,
+      "chapterName": "Sound Waves",
+      "grd": 11
+    },
+    {
+      "chapterId": 161,
+      "courseChapterId": 14,
+      "chapterName": "Elasticity",
+      "grd": 11
+    },
+    {
+      "chapterId": 11,
+      "courseChapterId": 15,
+      "chapterName": "Fluid Mechanics",
+      "grd": 11
+    },
+    {
+      "chapterId": 24,
+      "courseChapterId": 16,
+      "chapterName": "Thermometry And Kinetic Theory of Gases",
+      "grd": 11
+    },
+    {
+      "chapterId": 26,
+      "courseChapterId": 17,
+      "chapterName": "Heat Transfer",
+      "grd": 11
+    },
+    {
+      "chapterId": 25,
+      "courseChapterId": 18,
+      "chapterName": "Laws of Thermodynamics",
+      "grd": 11
+    },
+    {
+      "chapterId": 14,
+      "courseChapterId": 60,
+      "chapterName": "Electrostatics",
+      "grd": 12
+    },
+    {
+      "chapterId": 165,
+      "courseChapterId": 61,
+      "chapterName": "Capacitors",
+      "grd": 12
+    },
+    {
+      "chapterId": 164,
+      "courseChapterId": 62,
+      "chapterName": "Current Electricity",
+      "grd": 12
+    },
+    {
+      "chapterId": 16,
+      "courseChapterId": 63,
+      "chapterName": "Magnetism, Magnetic Effects of Current",
+      "grd": 12
+    },
+    {
+      "chapterId": 17,
+      "courseChapterId": 64,
+      "chapterName": "Electromagnetic Induction",
+      "grd": 12
+    },
+    {
+      "chapterId": 18,
+      "courseChapterId": 65,
+      "chapterName": "Alternating Current",
+      "grd": 12
+    },
+    {
+      "chapterId": 27,
+      "courseChapterId": 66,
+      "chapterName": "Reflection",
+      "grd": 12
+    },
+    {
+      "chapterId": 28,
+      "courseChapterId": 67,
+      "chapterName": "Refraction",
+      "grd": 12
+    },
+    {
+      "chapterId": 37,
+      "courseChapterId": 68,
+      "chapterName": "Propagation of Electromagnetic Waves And Modulatio",
+      "grd": 12
+    },
+    {
+      "chapterId": 29,
+      "courseChapterId": 69,
+      "chapterName": "Wave Optics",
+      "grd": 12
+    },
+    {
+      "chapterId": 30,
+      "courseChapterId": 70,
+      "chapterName": "Matter Wave and Photoelectric Effect",
+      "grd": 12
+    },
+    {
+      "chapterId": 31,
+      "courseChapterId": 71,
+      "chapterName": "Radioactivity And Mass Energy Relation",
+      "grd": 12
+    },
+    {
+      "chapterId": 32,
+      "courseChapterId": 72,
+      "chapterName": "Nuclear Fusion and Fission",
+      "grd": 12
+    },
+    {
+      "chapterId": 34,
+      "courseChapterId": 73,
+      "chapterName": "Semiconductors",
+      "grd": 12
+    },
+    {
+      "chapterId": 35,
+      "courseChapterId": 74,
+      "chapterName": "Junction Transistor And Logic Gates",
+      "grd": 12
+    },
+    {
+      "chapterId": 19,
+      "courseChapterId": 75,
+      "chapterName": "Electromagnetic Waves",
+      "grd": 12
+    }
+  ],
+  "chemistry": [
+    {
+      "chapterId": 166,
+      "courseChapterId": 39,
+      "chapterName": "Mole Concept",
+      "grd": 11
+    },
+    {
+      "chapterId": 168,
+      "courseChapterId": 40,
+      "chapterName": "Atomic Structure",
+      "grd": 11
+    },
+    {
+      "chapterId": 258,
+      "courseChapterId": 41,
+      "chapterName": "Periodic Classification",
+      "grd": 11
+    },
+    {
+      "chapterId": 355,
+      "courseChapterId": 42,
+      "chapterName": "Chemical Bonding",
+      "grd": 11
+    },
+    {
+      "chapterId": 260,
+      "courseChapterId": 43,
+      "chapterName": "Hydrogen & Its Compound",
+      "grd": 11
+    },
+    {
+      "chapterId": 175,
+      "courseChapterId": 44,
+      "chapterName": "Gaseous State",
+      "grd": 11
+    },
+    {
+      "chapterId": 171,
+      "courseChapterId": 45,
+      "chapterName": "Thermodynamics & Thermochemistry",
+      "grd": 11
+    },
+    {
+      "chapterId": 172,
+      "courseChapterId": 46,
+      "chapterName": "Redox Reaction",
+      "grd": 11
+    },
+    {
+      "chapterId": 173,
+      "courseChapterId": 47,
+      "chapterName": "Chemical Equilibrium",
+      "grd": 11
+    },
+    {
+      "chapterId": 174,
+      "courseChapterId": 48,
+      "chapterName": "Ionic Equilibrium",
+      "grd": 11
+    },
+    {
+      "chapterId": 261,
+      "courseChapterId": 49,
+      "chapterName": "S - Block Elements (1st Alkali Metals & 2nd Group Alkali Earth Metals)",
+      "grd": 11
+    },
+    {
+      "chapterId": 262,
+      "courseChapterId": 50,
+      "chapterName": "P - Block Elements (13th Boron Family & 14th Group Carbon Family)",
+      "grd": 11
+    },
+    {
+      "chapterId": 285,
+      "courseChapterId": 51,
+      "chapterName": "Classification of Organic Compounds & IUPAC Nomenclature",
+      "grd": 11
+    },
+    {
+      "chapterId": 271,
+      "courseChapterId": 52,
+      "chapterName": "General Organic Chemistry",
+      "grd": 11
+    },
+    {
+      "chapterId": 272,
+      "courseChapterId": 53,
+      "chapterName": "Isomerism",
+      "grd": 11
+    },
+    {
+      "chapterId": 276,
+      "courseChapterId": 54,
+      "chapterName": "Reaction Mechanism",
+      "grd": 11
+    },
+    {
+      "chapterId": 273,
+      "courseChapterId": 55,
+      "chapterName": "Hydrocarbon (Alkane + alkene + Alkynes + Aromatic)",
+      "grd": 11
+    },
+    {
+      "chapterId": 286,
+      "courseChapterId": 59,
+      "chapterName": "Purification and Characterisation of Organic Compounds",
+      "grd": 11
+    },
+    {
+      "chapterId": 180,
+      "courseChapterId": 103,
+      "chapterName": "Liquid Solution",
+      "grd": 12
+    },
+    {
+      "chapterId": 167,
+      "courseChapterId": 104,
+      "chapterName": "Volumetric Analysis",
+      "grd": 12
+    },
+    {
+      "chapterId": 178,
+      "courseChapterId": 105,
+      "chapterName": "Electrochemistry",
+      "grd": 12
+    },
+    {
+      "chapterId": 170,
+      "courseChapterId": 106,
+      "chapterName": "Chemical Kinetics",
+      "grd": 12
+    },
+    {
+      "chapterId": 177,
+      "courseChapterId": 107,
+      "chapterName": "Solid State",
+      "grd": 12
+    },
+    {
+      "chapterId": 257,
+      "courseChapterId": 108,
+      "chapterName": "Surface Chemistry",
+      "grd": 12
+    },
+    {
+      "chapterId": 269,
+      "courseChapterId": 109,
+      "chapterName": "Co-ordination Compounds",
+      "grd": 12
+    },
+    {
+      "chapterId": 264,
+      "courseChapterId": 110,
+      "chapterName": "P - Block Elements (15th Group Nitrogen Family)",
+      "grd": 12
+    },
+    {
+      "chapterId": 265,
+      "courseChapterId": 111,
+      "chapterName": "P - Block Elements (16th Group Oxygen Family)",
+      "grd": 12
+    },
+    {
+      "chapterId": 266,
+      "courseChapterId": 112,
+      "chapterName": "P - Block Elements (17th Group Halogen Family)",
+      "grd": 12
+    },
+    {
+      "chapterId": 267,
+      "courseChapterId": 113,
+      "chapterName": "P - Block Elements (18th Group Noble Gases Family)",
+      "grd": 12
+    },
+    {
+      "chapterId": 268,
+      "courseChapterId": 114,
+      "chapterName": "d and f – Block Elements",
+      "grd": 12
+    },
+    {
+      "chapterId": 259,
+      "courseChapterId": 115,
+      "chapterName": "Metallurgy & Ores",
+      "grd": 12
+    },
+    {
+      "chapterId": 287,
+      "courseChapterId": 116,
+      "chapterName": "Salt Analysis",
+      "grd": 12
+    },
+    {
+      "chapterId": 278,
+      "courseChapterId": 117,
+      "chapterName": "Organic Compounds Containing Halogen",
+      "grd": 12
+    },
+    {
+      "chapterId": 277,
+      "courseChapterId": 118,
+      "chapterName": "Alcohol Phenol Ether",
+      "grd": 12
+    },
+    {
+      "chapterId": 280,
+      "courseChapterId": 119,
+      "chapterName": "Aldehyde and Ketones",
+      "grd": 12
+    },
+    {
+      "chapterId": 279,
+      "courseChapterId": 120,
+      "chapterName": "Carboxylic Acid & Their Derivatives, Ester",
+      "grd": 12
+    },
+    {
+      "chapterId": 281,
+      "courseChapterId": 121,
+      "chapterName": "Amines",
+      "grd": 12
+    },
+    {
+      "chapterId": 283,
+      "courseChapterId": 122,
+      "chapterName": "Bio Molecules",
+      "grd": 12
+    },
+    {
+      "chapterId": 282,
+      "courseChapterId": 123,
+      "chapterName": "Polymers",
+      "grd": 12
+    },
+    {
+      "chapterId": 284,
+      "courseChapterId": 124,
+      "chapterName": "Chemistry in Everyday Life",
+      "grd": 12
+    }
+  ],
+  "maths": [
+    {
+      "chapterId": 40,
+      "courseChapterId": 19,
+      "chapterName": "Sets and Properties",
+      "grd": 11
+    },
+    {
+      "chapterId": 42,
+      "courseChapterId": 20,
+      "chapterName": "Relation, Types of Relations, Equivalence Relations",
+      "grd": 11
+    },
+    {
+      "chapterId": 46,
+      "courseChapterId": 21,
+      "chapterName": "Complex Numbers",
+      "grd": 11
+    },
+    {
+      "chapterId": 49,
+      "courseChapterId": 22,
+      "chapterName": "Quadratic Equation",
+      "grd": 11
+    },
+    {
+      "chapterId": 58,
+      "courseChapterId": 23,
+      "chapterName": "Permutation And Combination",
+      "grd": 11
+    },
+    {
+      "chapterId": 63,
+      "courseChapterId": 24,
+      "chapterName": "Binomial Theorem",
+      "grd": 11
+    },
+    {
+      "chapterId": 66,
+      "courseChapterId": 25,
+      "chapterName": "Sequence and Series",
+      "grd": 11
+    },
+    {
+      "chapterId": 101,
+      "courseChapterId": 27,
+      "chapterName": "Cartesian System and Properties",
+      "grd": 11
+    },
+    {
+      "chapterId": 104,
+      "courseChapterId": 28,
+      "chapterName": "Straight Line",
+      "grd": 11
+    },
+    {
+      "chapterId": 105,
+      "courseChapterId": 29,
+      "chapterName": "Pair of Lines",
+      "grd": 11
+    },
+    {
+      "chapterId": 106,
+      "courseChapterId": 30,
+      "chapterName": "Circle",
+      "grd": 11
+    },
+    {
+      "chapterId": 107,
+      "courseChapterId": 31,
+      "chapterName": "Parabola",
+      "grd": 11
+    },
+    {
+      "chapterId": 108,
+      "courseChapterId": 32,
+      "chapterName": "Ellipse",
+      "grd": 11
+    },
+    {
+      "chapterId": 109,
+      "courseChapterId": 33,
+      "chapterName": "Hyperbola",
+      "grd": 11
+    },
+    {
+      "chapterId": 144,
+      "courseChapterId": 34,
+      "chapterName": "Trigonometrical Ratios and Functions",
+      "grd": 11
+    },
+    {
+      "chapterId": 145,
+      "courseChapterId": 35,
+      "chapterName": "Trigonometrical Equations and Solution of Triangles",
+      "grd": 11
+    },
+    {
+      "chapterId": 149,
+      "courseChapterId": 37,
+      "chapterName": "Inequalities, Modulus and Log",
+      "grd": 11
+    },
+    {
+      "chapterId": 932,
+      "courseChapterId": 38,
+      "chapterName": "Mathematical Reasoning",
+      "grd": 11
+    },
+    {
+      "chapterId": 71,
+      "courseChapterId": 76,
+      "chapterName": "Functions",
+      "grd": 12
+    },
+    {
+      "chapterId": 72,
+      "courseChapterId": 77,
+      "chapterName": "Limits",
+      "grd": 12
+    },
+    {
+      "chapterId": 73,
+      "courseChapterId": 78,
+      "chapterName": "Continuity",
+      "grd": 12
+    },
+    {
+      "chapterId": 74,
+      "courseChapterId": 79,
+      "chapterName": "Differentiability",
+      "grd": 12
+    },
+    {
+      "chapterId": 75,
+      "courseChapterId": 80,
+      "chapterName": "Differentiation",
+      "grd": 12
+    },
+    {
+      "chapterId": 76,
+      "courseChapterId": 81,
+      "chapterName": "Application of Derivatives",
+      "grd": 12
+    },
+    {
+      "chapterId": 52,
+      "courseChapterId": 82,
+      "chapterName": "Matrices",
+      "grd": 12
+    },
+    {
+      "chapterId": 53,
+      "courseChapterId": 83,
+      "chapterName": "Determinants and Properties",
+      "grd": 12
+    },
+    {
+      "chapterId": 54,
+      "courseChapterId": 84,
+      "chapterName": "System of Linear Equations",
+      "grd": 12
+    },
+    {
+      "chapterId": 88,
+      "courseChapterId": 88,
+      "chapterName": "Indefinite Integration",
+      "grd": 12
+    },
+    {
+      "chapterId": 91,
+      "courseChapterId": 90,
+      "chapterName": "Definite Integration",
+      "grd": 12
+    },
+    {
+      "chapterId": 92,
+      "courseChapterId": 91,
+      "chapterName": "Area Under the Curve",
+      "grd": 12
+    },
+    {
+      "chapterId": 99,
+      "courseChapterId": 93,
+      "chapterName": "Differential Equations",
+      "grd": 12
+    },
+    {
+      "chapterId": 125,
+      "courseChapterId": 94,
+      "chapterName": "Lines 3D : Vector and Cartesian Form",
+      "grd": 12
+    },
+    {
+      "chapterId": 126,
+      "courseChapterId": 95,
+      "chapterName": "Planes 3D: Vector and Cartesian Form",
+      "grd": 12
+    },
+    {
+      "chapterId": 132,
+      "courseChapterId": 98,
+      "chapterName": "Vectors",
+      "grd": 12
+    },
+    {
+      "chapterId": 136,
+      "courseChapterId": 100,
+      "chapterName": "Measures of Dispersion: Mean, Median, Standard Deviation",
+      "grd": 12
+    },
+    {
+      "chapterId": 137,
+      "courseChapterId": 101,
+      "chapterName": "Probability",
+      "grd": 12
+    },
+    {
+      "chapterId": 146,
+      "courseChapterId": 3444,
+      "chapterName": "Inverse Trigonometrical Functions",
+      "grd": 12
+    }
+  ]
+}
