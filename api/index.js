@@ -65,6 +65,23 @@ app.get("/questions", async (req, res) => {
   });
 });
 
+app.post("/questions", async (req, res) => {
+  // {chapters: []}
+  const { chapters } = req.body;
+  if (!chapters || !chapters.length) {
+    res.status(400).send({ error: "Invalid chapters" });
+    return;
+  }
+  const questions = await getAllQuestions(chapters);
+  res.json({
+    numQuestions: questions.questions.length,
+    uniqueQuestions: new Set(questions.questions.map((q) => q.QuestionId)).size,
+    kscClusterNames: questions.kscClusterNames,
+    chapters: questions.chapterNames,
+    questions: questions.questions,
+  });
+});
+
 app.get("/question", async (req, res) => {
   // ?id=1
   const { id } = req.query;
