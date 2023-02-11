@@ -76,7 +76,7 @@ app.get("/questions", async (req, res) => {
     uniqueQuestions: new Set(questions.questions.map((q) => q.QuestionId)).size,
     kscClusterNames: questions.kscClusterNames,
     chapter: questions.chapterNames[0],
-    questions: questions.questions,
+    questions: questions.questions.sort((a, b) => a.QuestionId - b.QuestionId),
   });
 });
 
