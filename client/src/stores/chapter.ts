@@ -21,13 +21,17 @@ export const useChaptersStore = defineStore("chapters", () => {
       "chemistry",
       "maths",
     ];
-    for (const subject of subjects) {
-      const res = await fetch(
-        `${API_URL}/chapters?grade=11&subject=${subject}`
-      );
-      const allChapters: Chapter[] = await res.json();
-      chapters[subject] = allChapters;
-    }
+    await Promise.all(
+      subjects.map(async (subject) => {
+        const res1 = fetch(`${API_URL}/chapters?grade=11&subject=${subject}`);
+        const res2 = fetch(`${API_URL}/chapters?grade=12&subject=${subject}`);
+        const [r1, r2] = await Promise.all([res1, res2]);
+        const allChapters: Chapter[] = ((await r1.json()) as Chapter[]).concat(
+          (await r2.json()) as Chapter[]
+        );
+        chapters[subject] = allChapters;
+      })
+    );
 
     chaptersLoaded.value = true;
   };

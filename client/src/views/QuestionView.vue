@@ -36,6 +36,8 @@ onMounted(async () => {
             {{ questionInfo.questionData.answerOption }}
           </v-card-title>
         </v-card-text>
+
+        <v-img :src="questionInfo.questionData.fullSolutionURL" />
       </v-card>
     </v-container>
     <v-progress-linear v-else indeterminate></v-progress-linear>
