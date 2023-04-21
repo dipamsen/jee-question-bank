@@ -6,7 +6,9 @@ const props = defineProps<{
   questions: ChapterInfo["questions"];
 }>();
 
-const myWorker = new Worker("/worker.js");
+const questionPerPage = ref(10);
+
+const currentPage = ref(1);
 
 const selectedDifficulty = ref<string[]>([]);
 const selectedQuestionType = ref<string[]>([]);
@@ -14,54 +16,56 @@ const selectedKSCCluster = ref<string[]>([]);
 
 const difficultyOptions = ["Easy", "Basic", "Normal", "Hard", "Tough"];
 const questionTypeOptions = ["Objective", "Multiple Choice", "Numerical"];
+
+const firstQuestion = computed(() => {
+  return (currentPage.value - 1) * questionPerPage.value;
+});
+const lastQuestion = computed(() => {
+  return Math.min(
+    currentPage.value * questionPerPage.value,
+    renderedQuestions.value.length
+  );
+});
+
 const kscClusterNames = new Set(props.questions.map((q) => q.kscClusterName));
 
 const renderedQuestions = ref(props.questions);
 
 const applyFilters = (): Promise<ChapterInfo["questions"]> =>
   new Promise((resolve, reject) => {
-    // if (
-    //   selectedDifficulty.value.length === 0 &&
-    //   selectedQuestionType.value.length === 0 &&
-    //   selectedKSCCluster.value.length === 0
-    // ) {
-    //   return resolve(props.questions);
-    // }
-    // const output = props.questions.filter((q) => {
-    //   if (selectedDifficulty.value.length > 0) {
-    //     if (!selectedDifficulty.value.includes(q.DifficultyGroup)) {
-    //       return false;
-    //     }
-    //   }
-    //   if (selectedQuestionType.value.length > 0) {
-    //     if (!selectedQuestionType.value.includes(q.QuestionType)) {
-    //       return false;
-    //     }
-    //   }
-    //   if (selectedKSCCluster.value.length > 0) {
-    //     if (!selectedKSCCluster.value.includes(q.kscClusterName)) {
-    //       return false;
-    //     }
-    //   }
-    //   return true;
-    // });
-    // resolve(output);
+    if (
+      selectedDifficulty.value.length === 0 &&
+      selectedQuestionType.value.length === 0 &&
+      selectedKSCCluster.value.length === 0
+    ) {
+      return resolve(props.questions);
+    }
+    const output = props.questions.filter((q) => {
+      if (selectedDifficulty.value.length > 0) {
+        if (!selectedDifficulty.value.includes(q.DifficultyGroup)) {
+          return false;
+        }
+      }
+      if (selectedQuestionType.value.length > 0) {
+        if (!selectedQuestionType.value.includes(q.QuestionType)) {
+          return false;
+        }
+      }
+      if (selectedKSCCluster.value.length > 0) {
+        if (!selectedKSCCluster.value.includes(q.kscClusterName)) {
+          return false;
+        }
+      }
+      return true;
+    });
+    resolve(output);
   });
 
 async function filterData() {
   loading.value = true;
-
-  myWorker.postMessage({
-    questions: JSON.stringify(props.questions),
-    selectedDifficulty: JSON.stringify(selectedDifficulty.value),
-    selectedQuestionType: JSON.stringify(selectedQuestionType.value),
-    selectedKSCCluster: JSON.stringify(selectedKSCCluster.value),
-  });
-  myWorker.onmessage = (e) => {
-    renderedQuestions.value = e.data;
-    loading.value = false;
-    myWorker.onmessage = null;
-  };
+  renderedQuestions.value = await applyFilters();
+  currentPage.value = 1;
+  loading.value = false;
 }
 
 const loading = ref(false);
@@ -72,15 +76,14 @@ watchEffect(() => {
 </script>
 
 <template>
-  <!-- filters -->
   <v-row>
     <v-col cols="12" md="3">
       <v-select
+        multiple
         v-model="selectedDifficulty"
         :items="difficultyOptions"
         label="Difficulty"
         chips
-        multiple
         hide-details
       ></v-select>
     </v-col>
@@ -118,12 +121,24 @@ watchEffect(() => {
 
   <v-spacer class="my-2"></v-spacer>
 
+  <!-- pagination -->
+  <v-pagination
+    v-model="currentPage"
+    :length="Math.ceil(renderedQuestions.length / questionPerPage)"
+  ></v-pagination>
+
+  <v-spacer class="my-2"></v-spacer>
+
   <p class="text-disabled text-right mb-2">
-    Showing {{ renderedQuestions.length }} questions
+    Showing questions {{ firstQuestion + 1 }} - {{ lastQuestion }} out of
+    {{ renderedQuestions.length }} questions
   </p>
 
   <v-card
-    v-for="question in renderedQuestions"
+    v-for="question in renderedQuestions.slice(
+      firstQuestion,
+      firstQuestion + questionPerPage
+    )"
     :key="question.QuestionId"
     class="mb-4"
   >
@@ -147,4 +162,9 @@ watchEffect(() => {
       >
     </v-card-actions>
   </v-card>
+
+  <v-pagination
+    v-model="currentPage"
+    :length="Math.ceil(renderedQuestions.length / questionPerPage)"
+  ></v-pagination>
 </template>
