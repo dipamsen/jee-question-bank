@@ -6,7 +6,7 @@ const props = defineProps<{
   questions: ChapterInfo["questions"];
 }>();
 
-const questionPerPage = ref(10);
+const questionPerPage = ref(20);
 
 const currentPage = ref(1);
 

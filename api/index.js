@@ -9,22 +9,28 @@ const {
 } = require("../utils/functions");
 
 const axios = require("axios");
-const { getCompletedChaps, setCompletedChaps } = require("../utils/data-store");
-const sendRandomQuestion = require("../scripts/discord-send");
-const handleDiscordInteraction = require("../scripts/discord-interaction");
-const { verifyKeyMiddleware } = require("discord-interactions");
+// const { getCompletedChaps, setCompletedChaps } = require("../utils/data-store");
+// const sendRandomQuestion = require("../scripts/discord-send");
+// const handleDiscordInteraction = require("../scripts/discord-interaction");
+// const { verifyKeyMiddleware } = require("discord-interactions");
 const app = express();
 const allChaps = require("./chaps.json");
 
-app.post(
-  "/dc-interact",
-  // express.json(),
-  verifyKeyMiddleware(process.env.DISCORD_PUBLIC_KEY),
-  handleDiscordInteraction
-);
+// app.post(
+//   "/dc-interact",
+//   // express.json(),
+//   verifyKeyMiddleware(process.env.DISCORD_PUBLIC_KEY),
+//   handleDiscordInteraction
+// );
 
 app.use(cors());
 app.use(express.json());
+
+app.use((req, res, next) => {
+  res.set("Cache-Control", "public, max-age=86400");
+  res.set("Access-Control-Allow-Origin", "*");
+  next();
+});
 
 app.get("/", (req, res) => {
   res.send("SpeedLabs API");
@@ -108,38 +114,38 @@ app.get("/question", async (req, res) => {
   res.json(question);
 });
 
-app.get("/comp-status", async (req, res) => {
-  res.json(await getCompletedChaps());
-});
+// app.get("/comp-status", async (req, res) => {
+//   res.json(await getCompletedChaps());
+// });
 
-app.post("/comp-status", async (req, res) => {
-  const { completedChaps } = req.body;
-  if (
-    !completedChaps ||
-    !completedChaps.physics ||
-    !completedChaps.chemistry ||
-    !completedChaps.maths
-  ) {
-    res.status(400).send({ error: "Invalid request" });
-    return;
-  }
-  await setCompletedChaps(completedChaps);
-  res.json({ success: true });
-});
+// app.post("/comp-status", async (req, res) => {
+//   const { completedChaps } = req.body;
+//   if (
+//     !completedChaps ||
+//     !completedChaps.physics ||
+//     !completedChaps.chemistry ||
+//     !completedChaps.maths
+//   ) {
+//     res.status(400).send({ error: "Invalid request" });
+//     return;
+//   }
+//   await setCompletedChaps(completedChaps);
+//   res.json({ success: true });
+// });
 
-app.get("/discord-qod/:subject", async (req, res) => {
-  let { subject } = req.params;
-  if (subject === "random")
-    subject = ["physics", "chemistry", "maths"][Math.floor(Math.random() * 3)];
+// app.get("/discord-qod/:subject", async (req, res) => {
+//   let { subject } = req.params;
+//   if (subject === "random")
+//     subject = ["physics", "chemistry", "maths"][Math.floor(Math.random() * 3)];
 
-  if (!Constants[subject.toUpperCase()]) {
-    res.status(400).send({ error: "Invalid subject" });
-    return;
-  }
+//   if (!Constants[subject.toUpperCase()]) {
+//     res.status(400).send({ error: "Invalid subject" });
+//     return;
+//   }
 
-  await sendRandomQuestion(subject);
-  res.json({ success: true });
-});
+//   await sendRandomQuestion(subject);
+//   res.json({ success: true });
+// });
 
 app.listen(3000, () => {
   console.log("Server started on port 3000");
