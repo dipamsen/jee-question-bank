@@ -57,7 +57,8 @@ async function getAllQuestions(chapters) {
   return {
     questions: lvl1.data.questionsList
       .flat()
-      .concat(lvl2.data.questionsList.flat()),
+      .map((s) => ({ ...s, level: 1 }))
+      .concat(lvl2.data.questionsList.flat().map((s) => ({ ...s, level: 2 }))),
     kscClusterNames: lvl1.data.kscClusterNames,
     chapterNames: lvl1.data.chapterNames,
   };

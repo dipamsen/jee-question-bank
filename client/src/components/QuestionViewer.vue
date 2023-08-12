@@ -13,9 +13,11 @@ const currentPage = ref(1);
 const selectedDifficulty = ref<string[]>([]);
 const selectedQuestionType = ref<string[]>([]);
 const selectedKSCCluster = ref<string[]>([]);
+const selectedLevel = ref<string[]>([]);
 
 const difficultyOptions = ["Easy", "Basic", "Normal", "Hard", "Tough"];
 const questionTypeOptions = ["Objective", "Multiple Choice", "Numerical"];
+const levelOptions = ["JEE Main", "JEE Advanced"];
 
 const firstQuestion = computed(() => {
   return (currentPage.value - 1) * questionPerPage.value;
@@ -36,7 +38,8 @@ const applyFilters = (): Promise<ChapterInfo["questions"]> =>
     if (
       selectedDifficulty.value.length === 0 &&
       selectedQuestionType.value.length === 0 &&
-      selectedKSCCluster.value.length === 0
+      selectedKSCCluster.value.length === 0 &&
+      selectedLevel.value.length !== 1
     ) {
       return resolve(props.questions);
     }
@@ -54,6 +57,14 @@ const applyFilters = (): Promise<ChapterInfo["questions"]> =>
       if (selectedKSCCluster.value.length > 0) {
         if (!selectedKSCCluster.value.includes(q.kscClusterName)) {
           return false;
+        }
+      }
+      if (selectedLevel.value.length == 1) {
+        if (selectedLevel.value[0] === "JEE Main") {
+          return q.level == 1;
+        }
+        if (selectedLevel.value[0] === "JEE Advanced") {
+          return q.level == 2;
         }
       }
       return true;
@@ -103,6 +114,16 @@ watchEffect(() => {
         chips
         :items="[...kscClusterNames]"
         label="Topic"
+        multiple
+        hide-details
+      ></v-select>
+    </v-col>
+    <v-col cols="12" md="3">
+      <v-select
+        v-model="selectedLevel"
+        chips
+        :items="levelOptions"
+        label="Question Level"
         multiple
         hide-details
       ></v-select>
