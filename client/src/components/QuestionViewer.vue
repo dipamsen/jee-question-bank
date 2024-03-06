@@ -170,8 +170,10 @@ watchEffect(() => {
     ></v-img>
     <v-card-text>
       <p>{{ question.chapterName }} ({{ question.kscClusterName }})</p>
-      <p>{{ question.QuestionType }}</p>
-      <p>{{ question.DifficultyGroup }}</p>
+      <p>
+        {{ question.QuestionType }} | {{ question.DifficultyGroup }} | Level
+        {{ question.level }}
+      </p>
     </v-card-text>
     <v-divider />
     <v-card-actions>

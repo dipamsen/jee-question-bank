@@ -32,6 +32,7 @@ export interface ChapterInfo {
     GroupStart: number;
     chapterName: string;
     kscClusterName: string;
+    level: 1 | 2;
   }[];
 }
 
@@ -49,7 +50,7 @@ export interface QuestionInfo {
     chapterId: 72;
     topicId: 18;
     subjectId: 2;
-    questionTypeEnumId: QuestionType;
+    questionTypeId: QuestionType;
     keywords: null;
     pastYearAppearance: string | null;
     questionScore: number;

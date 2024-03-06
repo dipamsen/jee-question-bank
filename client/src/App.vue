@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { RouterLink, RouterView } from "vue-router";
 import { useChaptersStore } from "./stores/chapter";
+import "katex/dist/katex.min.css";
 
 const store = useChaptersStore();
 
