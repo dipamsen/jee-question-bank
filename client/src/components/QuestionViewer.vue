@@ -150,10 +150,21 @@ watchEffect(() => {
 
   <v-spacer class="my-2"></v-spacer>
 
-  <p class="text-disabled text-right mb-2">
-    Showing questions {{ firstQuestion + 1 }} - {{ lastQuestion }} out of
-    {{ renderedQuestions.length }} questions
-  </p>
+  <div class="d-flex space-between">
+    <p class="text-disabled">
+      Show
+      <select v-model="questionPerPage" class="text-disabled">
+        <option value="20">20</option>
+        <option value="50">50</option>
+        <option value="80">80</option>
+      </select>
+      questions on one page
+    </p>
+    <p class="text-disabled text-right mb-2">
+      Showing questions {{ firstQuestion + 1 }} - {{ lastQuestion }} out of
+      {{ renderedQuestions.length }} questions
+    </p>
+  </div>
 
   <v-card
     v-for="question in renderedQuestions.slice(
@@ -191,3 +202,9 @@ watchEffect(() => {
     :length="Math.ceil(renderedQuestions.length / questionPerPage)"
   ></v-pagination>
 </template>
+
+<style>
+.space-between {
+  justify-content: space-between;
+}
+</style>
